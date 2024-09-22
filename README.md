@@ -35,7 +35,49 @@ gem.
 
 ## Design
 
-TODO:
+For transactional service we need Wallet model and Transaction model. The Wallet holds balance from owner account,
+and Transaction holds transactional activity for deposit, withdraw and transfer. Sice
+
+Wallet:
++ id
++ owner (owner_id, owner_type)
++ balance
++ currency
++ timestamp
+
+Transaction:
++ id
++ from_wallet_id (belongs to Wallet)
++ to_wallet_id (belongs to Wallet)
++ amount
++ from_currency
++ converted_amount
++ to_currency
++ status
++ timestamp
+
+For owner we have User, Team and Stock.
+
+Team:
++ id
++ name
+
+bundle exec rails g scaffold team name:string
+
+
+User:
++ id
++ name
++ email
++ team_id
++ role
+
+
+Stock:
++ id
++ name
++ company
+
 
 ## RoR
 
