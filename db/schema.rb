@@ -26,8 +26,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_22_035203) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "from_wallet_id", null: false
-    t.integer "to_wallet_id", null: false
+    t.integer "from_wallet_id"
+    t.integer "to_wallet_id"
     t.decimal "amount", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
