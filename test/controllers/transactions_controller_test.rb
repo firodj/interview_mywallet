@@ -6,33 +6,12 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get transactions_url, as: :json
+    get transactions_url, headers: { Authorization: "Plain system" }, as: :json
     assert_response :success
-  end
-
-  test "should create transaction" do
-    assert_difference("Transaction.count") do
-      post transactions_url, params: { transaction: { amount: @transaction.amount, from_wallet_id: @transaction.from_wallet_id, to_wallet_id: @transaction.to_wallet_id } }, as: :json
-    end
-
-    assert_response :created
   end
 
   test "should show transaction" do
-    get transaction_url(@transaction), as: :json
+    get transaction_url(@transaction), headers: { Authorization: "Plain system" }, as: :json
     assert_response :success
-  end
-
-  test "should update transaction" do
-    patch transaction_url(@transaction), params: { transaction: { amount: @transaction.amount, from_wallet_id: @transaction.from_wallet_id, to_wallet_id: @transaction.to_wallet_id } }, as: :json
-    assert_response :success
-  end
-
-  test "should destroy transaction" do
-    assert_difference("Transaction.count", -1) do
-      delete transaction_url(@transaction), as: :json
-    end
-
-    assert_response :no_content
   end
 end

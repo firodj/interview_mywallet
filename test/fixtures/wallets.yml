@@ -8,4 +8,9 @@ john:
 y2b:
   owner: y2b
   owner_type: Stock
-  balance: 9.99
+  balance: 8.88
+
+alice:
+  owner: alice
+  owner_type: User
+  balance: 7.77

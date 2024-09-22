@@ -39,4 +39,31 @@ class TransactionTest < ActiveSupport::TestCase
 
     assert_not trans.save
   end
+
+  test "save transaction within same wallet will failed" do
+    trans = Transaction.new
+    trans.from_wallet = wallets(:john)
+    trans.to_wallet = wallets(:john)
+    trans.amount = 100
+
+    assert_not trans.save
+  end
+
+  test "update existing transaction from wallet will failed" do
+    trans = transactions(:one)
+    trans.from_wallet = wallets(:alice)
+    assert_not trans.save
+  end
+
+  test "update existing transaction to wallet will failed" do
+    trans = transactions(:one)
+    trans.to_wallet = wallets(:alice)
+    assert_not trans.save
+  end
+
+  test "update existing transaction amount will failed" do
+    trans = transactions(:one)
+    trans.amount = 1.11
+    assert_not trans.save
+  end
 end
