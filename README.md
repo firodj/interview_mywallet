@@ -52,11 +52,13 @@ Transaction:
 + from_wallet_id (belongs to Wallet)
 + to_wallet_id (belongs to Wallet)
 + amount
-+ from_currency
-+ converted_amount
-+ to_currency
++ ~~from_currency~~
++ ~~converted_amount~~
++ ~~to_currency~~
 + status
 + timestamp
+
+bundle exec rails g scaffold Transaction from_wallet:references to_wallet:references 'amount:decimal{8,2}'
 
 For owner we have User, Team and Stock.
 
