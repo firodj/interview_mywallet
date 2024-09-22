@@ -30,7 +30,7 @@ wallet, transactions.
 3. Use STI (or any other design pattern) for proper money manipulation.
 4. Apply your own sign in (new session solution, no sign up is needed) without any external
 gem.
-5. Create a LatestStockPrice library (in lib folder in **gem style**) for **price**, **prices** and
+5. Create a `LatestStockPrice` library (in lib folder in **gem style**) for **price**, **prices** and
 **price_all** endpoints - https://rapidapi.com/suneetk92/api/latest-stock-price
 
 ## Design
@@ -64,14 +64,13 @@ Team:
 
 bundle exec rails g scaffold team name:string
 
-
 User:
 + id
 + name
 + email
 + team_id
-+ role
 
+bundle exec rails g scaffold user name:string email:string team:references
 
 Stock:
 + id
