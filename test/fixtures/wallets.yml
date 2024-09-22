@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  owner: one
-  owner_type: Owner
+john:
+  owner: john
+  owner_type: John
   balance: 9.99
 
-two:
-  owner: two
-  owner_type: Owner
+2b:
+  owner: 2b
+  owner_type: Stock
   balance: 9.99
