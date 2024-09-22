@@ -2,10 +2,10 @@
 
 john:
   owner: john
-  owner_type: John
+  owner_type: User
   balance: 9.99
 
-2b:
-  owner: 2b
+y2b:
+  owner: y2b
   owner_type: Stock
   balance: 9.99

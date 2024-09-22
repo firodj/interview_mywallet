@@ -2,10 +2,10 @@
 
 one:
   from_wallet: john
-  to_wallet: 2b
+  to_wallet: y2b
   amount: 9.99
 
 two:
-  from_wallet: 2b
+  from_wallet: y2b
   to_wallet: john
   amount: 9.99
