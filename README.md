@@ -42,8 +42,10 @@ Wallet:
 + id
 + owner (owner_id, owner_type)
 + balance
-+ currency
++ ~~currency~~
 + timestamp
+
+bundle exec rails g scaffold Wallet owner:references{polymorphic} 'balance:decimal{8,2}'
 
 Transaction:
 + id
