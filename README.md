@@ -83,6 +83,16 @@ Stock:
 
 bundle exec rails g scaffold stock name:string:uniq company:string
 
+## Running Test
+
+bundle exec rails db:test:prepare
+bundle exec rails test
+
+## Running Server
+
+bundle exec rails db:migrate
+bundle exec rails serve
+
 ## RoR
 
 This README would normally document whatever steps are necessary to get the
