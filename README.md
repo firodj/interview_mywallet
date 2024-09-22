@@ -70,13 +70,14 @@ User:
 + email
 + team_id
 
-bundle exec rails g scaffold user name:string email:string team:references
+bundle exec rails g scaffold user name:string email:string:uniq team:references
 
 Stock:
 + id
 + name
 + company
 
+bundle exec rails g scaffold stock name:string:uniq company:string
 
 ## RoR
 
