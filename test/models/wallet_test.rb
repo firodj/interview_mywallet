@@ -23,4 +23,17 @@ class WalletTest < ActiveSupport::TestCase
     wallet.owner = stocks(:y9s)
     assert wallet.save
   end
+
+  test "update wallet balance will success" do
+    wallet = wallets(:john)
+    wallet.balance += 100
+    assert wallet.save
+  end
+
+  test "update wallet owner will failed" do
+    wallet = wallets(:john)
+    assert wallet.owner == users(:john)
+    wallet.owner = teams(:blue)
+    assert_not wallet.save
+  end
 end

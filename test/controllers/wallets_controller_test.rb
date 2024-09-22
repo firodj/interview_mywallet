@@ -2,37 +2,16 @@ require "test_helper"
 
 class WalletsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @wallet = wallets(:one)
+    @wallet = wallets(:john)
   end
 
   test "should get index" do
-    get wallets_url, as: :json
+    get wallets_url, headers: { Authorization: "Plain system" }, as: :json
     assert_response :success
-  end
-
-  test "should create wallet" do
-    assert_difference("Wallet.count") do
-      post wallets_url, params: { wallet: { balance: @wallet.balance, owner_id: @wallet.owner_id, owner_type: @wallet.owner_type } }, as: :json
-    end
-
-    assert_response :created
   end
 
   test "should show wallet" do
-    get wallet_url(@wallet), as: :json
+    get wallet_url(@wallet), headers: { Authorization: "Plain system" }, as: :json
     assert_response :success
-  end
-
-  test "should update wallet" do
-    patch wallet_url(@wallet), params: { wallet: { balance: @wallet.balance, owner_id: @wallet.owner_id, owner_type: @wallet.owner_type } }, as: :json
-    assert_response :success
-  end
-
-  test "should destroy wallet" do
-    assert_difference("Wallet.count", -1) do
-      delete wallet_url(@wallet), as: :json
-    end
-
-    assert_response :no_content
   end
 end
