@@ -8,14 +8,14 @@ class UserControllerTest < ActionDispatch::IntegrationTest
 
   test "user should post deposit" do
     post user_deposit_url,
-      params: { deposit: { amount: 150 } },
+      params: { deposit: { amount: 2.22 } },
       headers: { Authorization: "Plain john@example.com"}, as: :json
     assert_response :success, response.body
   end
 
   test "user should post withdraw" do
     post user_withdraw_url,
-      params: { withdraw: { amount: 150 } },
+      params: { withdraw: { amount: 2.22 } },
       headers: { Authorization: "Plain john@example.com"}, as: :json
     assert_response :success, response.body
   end
@@ -25,7 +25,7 @@ class UserControllerTest < ActionDispatch::IntegrationTest
     alice_wallet = wallets(:alice)
 
     post user_transfer_url,
-      params: { transfer: { to_wallet_id: alice_wallet.id, amount: 150 } },
+      params: { transfer: { to_wallet_id: alice_wallet.id, amount: 2.22 } },
       headers: { Authorization: "Plain john@example.com"}, as: :json
 
     assert_response :success, response.body

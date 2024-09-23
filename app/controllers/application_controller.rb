@@ -2,23 +2,21 @@ class ApplicationController < ActionController::API
   before_action :set_default_response_format
   before_action :check_authorize_access
 
-  class UserNotAuthorized < StandardError; end
-
-  rescue_from UserNotAuthorized, with: :user_not_authorized
+  rescue_from CustomErrors::UserNotAuthorized, with: :user_not_authorized
 
   attr_reader :current_user
   attr_reader :is_admin
 
   def authorize_admin_only
-    raise UserNotAuthorized unless @is_admin
+    raise CustomErrors::UserNotAuthorized unless @is_admin
   end
 
   def authorize_user_only
-    raise UserNotAuthorized unless @current_user
+    raise CustomErrors::UserNotAuthorized unless @current_user
   end
 
   def authorize_only
-    raise UserNotAuthorized unless @current_user || @is_admin
+    raise CustomErrors::UserNotAuthorized unless @current_user || @is_admin
   end
 
   private

@@ -8,39 +8,42 @@ class UserController < ApplicationController
 
   def deposit
     params.require(:deposit).permit(:amount)
-    @wallet.balance += params[:deposit][:amount]
-    @wallet.save
-    render json: @wallet, include: ['owner']
+    amount = params[:deposit][:amount]
+    if amount <= 0
+      return render json: { message: "Illegal amount" }, status: :bad_request
+    end
+
+    processor = DepositProcessor.new(@wallet, amount)
+    processor.run
+
+    render json: processor.wallet, include: ['owner']
   end
 
   def withdraw
     params.require(:withdraw).permit(:amount)
-    @wallet.balance -= params[:withdraw][:amount]
-    @wallet.save
-    render json: @wallet, include: ['owner']
+    amount = params[:withdraw][:amount]
+    if amount <= 0
+      return render json: { message: "Illegal amount" }, status: :bad_request
+    end
+
+    processor = WithdrawProcessor.new(@wallet, amount)
+    processor.run
+
+    render json: processor.wallet, include: ['owner']
   end
 
   def transfer
     params.require(:transfer).permit(:to_wallet_id, :amount)
     to_wallet = Wallet.find(params[:transfer][:to_wallet_id])
     amount = params[:transfer][:amount]
-
-    ActiveRecord::Base.transaction do
-      trans = Transaction.create({
-        to_wallet: to_wallet,
-        from_wallet: @wallet,
-        amount: amount
-      })
-      trans.save!
-
-      @wallet.balance -= amount
-      @wallet.save!
-
-      to_wallet.balance += amount
-      to_wallet.save!
+    if amount <= 0
+      return render json: { message: "Illegal amount" }, status: :bad_request
     end
 
-    render json: @wallet, include: ['owner']
+    processor = TransferProcessor.new(@wallet, to_wallet, amount)
+    processor.run
+
+    render json: processor.from_wallet, include: ['owner']
   end
 
   def transactions
