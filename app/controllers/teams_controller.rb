@@ -17,8 +17,9 @@ class TeamsController < ApplicationController
   # POST /teams
   def create
     @team = Team.new(team_params)
+    @wallet = Wallet.new(owner: @team)
 
-    if @team.save
+    if @wallet.save
       render json: @team, status: :created, location: @team
     else
       render json: @team.errors, status: :unprocessable_entity

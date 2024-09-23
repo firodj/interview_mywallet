@@ -16,8 +16,9 @@ class StocksController < ApplicationController
   # POST /stocks
   def create
     @stock = Stock.new(stock_params)
+    @wallet = Wallet.new(owner: @stock)
 
-    if @stock.save
+    if @wallet.save
       render json: @stock, status: :created, location: @stock
     else
       render json: @stock.errors, status: :unprocessable_entity

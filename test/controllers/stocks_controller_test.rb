@@ -18,6 +18,9 @@ class StocksControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :created
+
+    new_stock = Stock.find(response.parsed_body["id"])
+    assert new_stock.wallet != nil
   end
 
   test "should show stock" do

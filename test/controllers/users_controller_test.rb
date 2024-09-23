@@ -19,7 +19,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         as: :json
     end
 
-    assert_response :created
+    assert_response :created, response.body
+
+    new_user = User.find(response.parsed_body["id"])
+    assert new_user.wallet != nil
   end
 
   test "should show user" do

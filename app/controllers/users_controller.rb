@@ -17,8 +17,9 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
+    @wallet = Wallet.new(owner: @user)
 
-    if @user.save
+    if @wallet.save
       render json: @user, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity

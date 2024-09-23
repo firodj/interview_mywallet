@@ -22,6 +22,9 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :created
+
+    new_team = Team.find(response.parsed_body["id"])
+    assert new_team.wallet != nil
   end
 
   test "should show team" do
