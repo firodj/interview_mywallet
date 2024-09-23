@@ -4,6 +4,8 @@ class User < ApplicationRecord
   validates_presence_of :name, :email
   validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
+  has_one :wallet, as: :owner
+
   def email=(email)
     super(email.downcase.strip)
   end

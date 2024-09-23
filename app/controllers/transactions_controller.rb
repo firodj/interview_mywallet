@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :authorize_admin
+  before_action :authorize_admin_only
   before_action :set_transaction, only: %i[ show ]
 
   # GET /transactions

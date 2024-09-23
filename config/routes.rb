@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+
   scope '/api/v1' do
     resources :teams
     resources :stocks
     resources :users
     resources :wallets, only: [:index, :show]
     resources :transactions
+
+    get 'user/wallet'
+    post 'user/deposit'
+    post 'user/withdraw'
+    post 'user/transfer'
+    get 'user/transactions'
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
