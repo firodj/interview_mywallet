@@ -4,7 +4,10 @@ Rails.application.routes.draw do
     resources :teams
     resources :stocks
     resources :users
-    resources :wallets, only: [:index, :show]
+    resources :wallets, only: [:index, :show] do
+      post 'deposit'
+      post 'withdraw'
+    end
     resources :transactions
 
     get 'user/wallet'
