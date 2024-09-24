@@ -16,7 +16,7 @@ module LatestStockPrice
       http.use_ssl = true
 
       request = Net::HTTP::Get.new(url)
-      request["x-rapidapi-key"] = ''
+      request["x-rapidapi-key"] = ENV.fetch("RAPIDAPI_KEY")
       request["x-rapidapi-host"] = 'latest-stock-price.p.rapidapi.com'
 
       response = http.request(request)

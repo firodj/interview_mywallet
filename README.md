@@ -91,10 +91,22 @@ and to access transactional related API, pass header `Authorization: Plain <emai
 
 ## Running Test
 
+```
 bundle exec rails db:test:prepare
 bundle exec rails test
+```
 
 ## Running Server
 
+```
 bundle exec rails db:migrate
 bundle exec rails server
+```
+
+## Fetch Stock
+
+To hit latest stock price API run:
+
+```
+RAPIDAPI_KEY=<secret> bundle exec rails fetch_stock:price_all
+```
