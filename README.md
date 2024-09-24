@@ -42,23 +42,14 @@ Wallet:
 + id
 + owner (owner_id, owner_type)
 + balance
-+ ~~currency~~
 + timestamp
-
-bundle exec rails g scaffold Wallet owner:references{polymorphic} 'balance:decimal{8,2}'
 
 Transaction:
 + id
 + from_wallet_id (belongs to Wallet)
 + to_wallet_id (belongs to Wallet)
 + amount
-+ ~~from_currency~~
-+ ~~converted_amount~~
-+ ~~to_currency~~
-+ status
 + timestamp
-
-bundle exec rails g scaffold Transaction from_wallet:references to_wallet:references 'amount:decimal{8,2}'
 
 For owner we have User, Team and Stock.
 
@@ -66,22 +57,37 @@ Team:
 + id
 + name
 
-bundle exec rails g scaffold team name:string
-
 User:
 + id
 + name
 + email
-+ team_id
-
-bundle exec rails g scaffold user name:string email:string:uniq team:references
++ team_id (nullable)
 
 Stock:
 + id
 + name
 + company
 
-bundle exec rails g scaffold stock name:string:uniq company:string
+The API using simple authenticated mechanism.
+To access resources related to system, pass header `Authorization: Plain system`.
+
+```
+/api/v1/teams
+/api/v1/stocks
+/api/v1/users
+/api/v1/wallets
+/api/v1/transactions
+```
+
+and to access transactional related API, pass header `Authorization: Plain <email>`
+
+```
+/api/v1/user/wallet
+/api/v1/user/deposit
+/api/v1/user/withdraw
+/api/v1/user/transfer
+/api/v1/user/transactions
+```
 
 ## Running Test
 
@@ -91,29 +97,4 @@ bundle exec rails test
 ## Running Server
 
 bundle exec rails db:migrate
-bundle exec rails serve
-
-## RoR
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+bundle exec rails server
